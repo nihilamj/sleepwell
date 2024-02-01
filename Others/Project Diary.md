@@ -9,12 +9,57 @@
 <br>
 
 ## 📅 29 JAN 2024
-<br>
 I submitted three project ideas to the guide for approval, and the guide approved the project idea titled ‘Sleep, Health & Lifestyle predictor using Machine Learning in Python Django’.
 
 <br><br>
 
 
-## 📅 29 JAN 2024
+## 📅 30 JAN 2024
+Following packages and software were installed :
+- Python
+- PIP
+- Postgresql
+- Virtualenvwrapper-win
+- Django
+- python-decouple
+- psycopg-binary 
+
+<br><br>
+
+## 📅 1 FEB 2024
+- created a GitHub repository ‘sleepwell’ to build,commit my project and to store other related files.
+- updated the git ignore
+- created a django project named ‘sleepwell’
+- created a database named 'sleepwell' in postgres using pgAdmin
+- created .env file in root directory to store Postgresql credentials
+- created a superuser for the project named as 'mj'
+- created an app named 'mainapp' in the project
+- changes were migrated & tables were automatically build by Django
+
 <br>
-I submitted three project ideas to the guide for approval, and the guide approved the project idea titled ‘Sleep, Health & Lifestyle predictor using Machine Learning in Python Django’.
+
+**Changes made in settings.py file :**
+
+- changed time zone to 'Asia/Kolkata'
+- Imported config module from decouple to use the database credentials from the .env file
+- added 'mainapp' to installed app section
+
+<br>
+
+**created urls.py file inside mainapp :**
+
+- added the code for URL patterns of views
+
+<br>
+
+**Changes made in views.py file in mainapp :**
+
+- added the code for home function<br>
+
+**changes made in urls.py file inside sleepwell:**
+
+- added the code for URL patterns of views
+
+<br>
+
+### *all codes and files are commited.*
