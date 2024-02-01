@@ -56,6 +56,8 @@ Following packages and software were installed :
 
 - added the code for home function<br>
 
+<br>
+
 **changes made in urls.py file inside sleepwell:**
 
 - added the code for URL patterns of views
