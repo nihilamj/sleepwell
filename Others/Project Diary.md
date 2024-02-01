@@ -63,5 +63,3 @@ Following packages and software were installed :
 - added the code to include the URL patterns of mainapp
 
 <br>
-
-#### *all codes and files are commited.*
