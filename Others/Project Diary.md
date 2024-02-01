@@ -48,7 +48,7 @@ Following packages and software were installed :
 
 **created urls.py file inside mainapp :**
 
-- added the code for URL patterns of views
+- added the code for URL patterns for functions in views
 
 <br>
 
@@ -60,7 +60,7 @@ Following packages and software were installed :
 
 **changes made in urls.py file inside sleepwell:**
 
-- added the code for URL patterns of views
+- added the code to include the URL patterns of mainapp
 
 <br>
 
