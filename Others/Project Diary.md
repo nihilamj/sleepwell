@@ -48,13 +48,13 @@ Following packages and software were installed :
 
 **created urls.py file inside mainapp :**
 
-- added the code for URL patterns for functions in views
+- added the code for URL patterns for functions in views.py file
 
 <br>
 
 **Changes made in views.py file in mainapp :**
 
-- added the code for home function<br>
+- added the code for home function
 
 <br>
 
