@@ -62,4 +62,54 @@ Following packages and software were installed :
 
 - added the code to include the URL patterns of mainapp
 
+<br><br>
+
+
+## 📅 2 FEB 2024
+
+- Created a static folder, inside this folder created another folder named as mainapp
+- Created a templates folder, inside this folder created another folder named as mainapp
+
 <br>
+
+- downloaded a template from [www.free-css.com](http://www.free-css.com/) and extracted
+- Copied the below mentioned folders and files to the mainapp/static/mainapp directory
+
+    1. CSS
+
+    2. Fonts
+
+    3. img
+
+    4. js
+
+    5. mail
+
+<br>
+
+- created a base.html in mainapp/templates/mainapp directory
+- created below mentioned html files in mainapp/templates/mainapp directory and extended using 
+base.html
+
+    1. home.html
+    2. about.html
+
+<br>
+
+**Changes made in views.py file in mainapp :**
+
+- changes made for home function
+- created below mentioned functions
+
+    1. about
+
+<br>
+
+**created urls.py file inside mainapp :**
+
+- added the URL pattern for below mentioned functions from views.py
+
+    1. about
+
+<br>
+
