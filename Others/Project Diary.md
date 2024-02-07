@@ -150,6 +150,8 @@ base.html
     2. HealthProfile
 
 
+**Templates**
+
 - created below mentioned html files in /healthrecord/templates/healthrecord directory
 
     1. signup.html
