@@ -111,5 +111,69 @@ base.html
 
     1. about
 
+<br><br>
+
+
+## 📅 6 & 7 FEB 2024
+
+- created a new app named 'healthrecord'
+- created a urls.py inside healthrecord folder
+- Created a templates folder, inside this folder created another folder named as healthrecord 
+- created a forms.py file inside healthrecord folder.
+
 <br>
 
+**Changes made in settings.py file :**
+- added healthrecord to app section.
+
+<br>
+
+**Changes made in urls.py file in sleepwell folder :**
+- added the code to include the URL patterns of healthrecord app.
+
+<br>
+
+**Changes made in Models.py**
+
+- created a model for
+    1. Occupations
+    2. HealthProfile
+
+**Changes made in Admins.py**
+- created admin class and register for the following model
+    1. Occupations
+    2. HealthProfile
+
+**Changes made in forms.py**
+- created forms for following model
+    1. Occupations
+    2. HealthProfile
+
+
+- created below mentioned html files in /healthrecord/templates/healthrecord directory
+
+    1. signup.html
+    2. signin.html
+
+<br>
+
+**Changes made in views.py file in healthrecord :**
+
+
+- created below mentioned functions
+
+    1. signup
+    2. signin
+
+<br>
+
+**created urls.py file inside mainapp :**
+
+- added the URL pattern for below mentioned functions from views.py
+
+    1. signup
+    2. signin
+
+
+
+<br><br>
