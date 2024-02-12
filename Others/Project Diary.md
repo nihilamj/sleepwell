@@ -146,8 +146,8 @@ base.html
 
 **Changes made in forms.py**
 - created forms for following model
-    1. Occupations
-    2. HealthProfile
+    1. OccupationForm
+    2. HealthProfileForm
 
 
 **Templates**
@@ -197,3 +197,4 @@ base.html
 ## 📅 12 FEB 2024
 
 - Uploaded the the Abstract to **Documentation** Folder
+- Renamed the 'HealthProfile' to 'HealthProfileSignUPForm' in forms.py
