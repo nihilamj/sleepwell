@@ -198,3 +198,24 @@ base.html
 
 - Uploaded the the Abstract to **Documentation** Folder
 - Renamed the 'HealthProfile' to 'HealthProfileSignUPForm' in forms.py
+- Renamed the healthrecord app to healthprofile
+
+<br>
+
+**Templates**
+- dashboard.html
+
+**urls.py in healthprofile**
+- added the URL pattern for the following
+    1. Dashboard
+    2. signout
+
+**views.py in healthprofile**
+- added the functions for the following
+    1. Dashboard
+    2. signout
+
+**forms.py in healthprofile**
+- added the form for following
+    1. HealthProfileSignINForm
+    2. HealthProfileSignUPForm
