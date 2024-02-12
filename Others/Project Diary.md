@@ -179,3 +179,21 @@ base.html
 
 
 <br><br>
+
+
+
+## 📅 9 FEB 2024
+
+- submitted a Absract of the Project to Project Guide
+
+    1. Research Area
+    2. Objectives
+    3. Requirements
+    4. Modules with small Descriptions.
+    5. Problem statement.
+
+<br> <br>
+
+## 📅 12 FEB 2024
+
+- Uploaded the the Abstract to **Documentation** Folder
