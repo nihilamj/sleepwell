@@ -205,17 +205,55 @@ base.html
 **Templates**
 - dashboard.html
 
+<br>
+
 **urls.py in healthprofile**
 - added the URL pattern for the following
     1. Dashboard
     2. signout
 
+<br>
+
 **views.py in healthprofile**
 - added the functions for the following
     1. Dashboard
     2. signout
+<br>
 
 **forms.py in healthprofile**
 - added the following forms
     1. HealthProfileSignINForm
     2. HealthProfileSignUPForm
+
+<br><br>
+
+## 📅 13 FEB 2024
+
+- added the code for a successfull login and logout with a user session
+
+<br>
+
+**views.py in healthprofile**
+
+- added below mentioned views
+
+    1. getUser()
+    2. removeUser()
+
+- changes made for below mentioned views
+
+    1. signin()
+    2. signout()
+    3. dashboard()
+
+<br>
+
+**templates.py in healthprofile**
+
+- changes made for below mentioned templates
+
+    1. dashboard.html
+
+
+<br><br>
+
