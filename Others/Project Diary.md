@@ -216,6 +216,6 @@ base.html
     2. signout
 
 **forms.py in healthprofile**
-- added the form for following
+- added the following forms
     1. HealthProfileSignINForm
     2. HealthProfileSignUPForm
