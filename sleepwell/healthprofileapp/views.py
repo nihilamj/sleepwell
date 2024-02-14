@@ -1,5 +1,8 @@
+from http.client import HTTPResponse
 from django.shortcuts import render,redirect
 from django.http import HttpResponseRedirect
+
+from healthprofileapp.models import HealthProfile
 from .forms import OccupationForm, HealthProfileSignUPForm,HealthProfileSignINForm
 from django.contrib import messages
 
@@ -37,7 +40,25 @@ def signin(request):
         print("1")
         if form.is_valid():
             removeUser(request)
-            request.session['user_data'] = {'authenticated': True}
+            try:
+                email = form.cleaned_data['email']
+                health_profile = HealthProfile.objects.get(email=email)
+                
+                userrecord = {
+                    'id': health_profile.id,
+                    'name': health_profile.name,
+                    'email': health_profile.email,
+                    'password': health_profile.password,
+                    'gender': health_profile.gender,
+                    'age': health_profile.age,
+                    'occupations': health_profile.occupations.name,
+                }
+
+                print(userrecord)
+                request.session['user_data'] = {'authenticated': True, 'userrecord':userrecord}
+            except HealthProfile.DoesNotExist:
+                return HTTPResponse("Invalid credentials. Please try again.")
+            
             return redirect('dashboard')  # Change 'dashboard' to the name of your dashboard URL
             #return HttpResponseRedirect('/',request)
     else:
@@ -61,6 +82,7 @@ def dashboard(request):
     if 'user_data' in request.session:
         if request.session['user_data'] is not None:
             data['authenticated'] = request.session['user_data'].get('authenticated', False)
+            data['userrecord'] = request.session['user_data'].get('userrecord')
         else:
             # Handle the case where request.session['user_data'] is None
             # For example, set data['authenticated'] to False or another default value
@@ -69,8 +91,11 @@ def dashboard(request):
         # Handle the case where 'user_data' doesn't exist in request.session
         # For example, set data['authenticated'] to False or another default value
         data['authenticated'] = False
-    
-    return render(request, 'healthprofileapp/dashboard.html', {'page': 'dashboard','data':data})
+        
+    if data['authenticated']:
+        return render(request, 'healthprofileapp/dashboard.html', {'page': 'dashboard','data':data})
+    else:
+        return redirect('signin')
 
 
 
