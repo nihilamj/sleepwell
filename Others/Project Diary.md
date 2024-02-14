@@ -260,3 +260,19 @@ base.html
 
 <br><br>
 
+
+## 📅 13 FEB 2024
+
+**views.py in healthprofile**
+
+- changes made for below mentioned views
+    1. signin
+    2. dashboard
+
+<br>
+
+**templates.py in healthprofile**
+
+- changes made for below mentioned templates
+
+    1. dashboard.html
