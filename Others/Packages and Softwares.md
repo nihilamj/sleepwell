@@ -39,5 +39,5 @@ to store sensitive information like database credentials in environment variable
 
 <br>
 
-## psycopg-binary 3.1.17
+## psycopg-binary 3.1.17 & psycopg-3.1.17
  Psycopg-binary 3 is a modern implementation of a PostgreSQL adapter for Python.
