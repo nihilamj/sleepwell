@@ -24,7 +24,7 @@ class HealthProfile(models.Model):
     password = models.CharField(max_length=255, blank=False, null=False)
     gender = models.CharField(max_length=25, choices=GENDER_CHOICES, blank=False, null=False)
     age = models.IntegerField(blank=False, null=False)
-    occupations = models.ForeignKey(Occupation, blank=False,null=False,default=1,on_delete=models.CASCADE)
+    occupation = models.ForeignKey(Occupation, blank=False,null=False,default=1,on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name

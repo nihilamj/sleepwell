@@ -9,10 +9,10 @@ class OccupationAdmin(admin.ModelAdmin):
     search_fields = ('id','name')
 
 class HealthProfileAdmin(admin.ModelAdmin):
-    list_display = ('id','name','email','gender','age','occupations')
-    search_fields = ('id','name','email','gender','age','occupations__name')
+    list_display = ('id','name','email','gender','age','occupation')
+    search_fields = ('id','name','email','gender','age','occupation__name')
 
-    @admin.display(ordering='occupations__name',description='occupations name')
+    @admin.display(ordering='occupation__name',description='occupation name')
     def occupationname(self,obj):
         return obj.occupation.name
 

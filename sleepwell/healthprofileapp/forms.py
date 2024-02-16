@@ -14,7 +14,7 @@ class OccupationForm(forms.ModelForm):
         fields = ['name']
 
 class HealthProfileSignUPForm(forms.ModelForm):
-    #occupations = forms.ModelChoiceField(queryset=Occupation.objects.all(), empty_label=None)
+    #occupation = forms.ModelChoiceField(queryset=Occupation.objects.all(), empty_label=None)
 
     GENDER_CHOICES = HealthProfile.GENDER_CHOICES
 
@@ -23,12 +23,12 @@ class HealthProfileSignUPForm(forms.ModelForm):
     password = forms.CharField(max_length=255, label='Password', required=True, widget=forms.PasswordInput)
     gender = forms.ChoiceField(choices=GENDER_CHOICES, label='Gender', required=True)
     age = forms.IntegerField(label='Age', required=True)
-    #occupations = forms.ChoiceField(choices=[(occupation.name, occupation.name) for occupation in Occupation.objects.all()], label='Occupation', required=True)
-    occupations = forms.ModelChoiceField(queryset=Occupation.objects.all(), label='Occupation', required=True)
+    #occupation = forms.ChoiceField(choices=[(occupation.name, occupation.name) for occupation in Occupation.objects.all()], label='Occupation', required=True)
+    occupation = forms.ModelChoiceField(queryset=Occupation.objects.all(), label='Occupation', required=True)
 
     class Meta:
         model = HealthProfile
-        fields = ['name', 'email', 'password', 'gender', 'age', 'occupations']
+        fields = ['name', 'email', 'password', 'gender', 'age', 'occupation']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
