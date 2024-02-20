@@ -84,23 +84,24 @@ class HealthRecord(models.Model):
     def save(self, *args, **kwargs):
         # BMI Calculation and saving logic
         if self.height > 0 and self.weight > 0:
-            bmi = self.weight / (self.height ** 2)
-            if bmi < 16:
-                self.bmi_category = 'Severe Thinness'
-            elif 16 <= bmi < 17:
-                self.bmi_category = 'Moderate Thinness'
-            elif 17 <= bmi < 18.5:
-                self.bmi_category = 'Mild Thinness'
-            elif 18.5 <= bmi < 25:
-                self.bmi_category = 'Normal'
-            elif 25 <= bmi < 30:
-                self.bmi_category = 'Overweight'
-            elif 30 <= bmi < 35:
-                self.bmi_category = 'Obese Class I'
-            elif 35 <= bmi < 40:
-                self.bmi_category = 'Obese Class II'
+            bmi_val = self.weight / (self.height ** 2)
+            print(f"bmi value = {bmi_val}")
+            if bmi_val < 16:
+                self.bmi = 'Severe Thinness'
+            elif 16 <= bmi_val < 17:
+                self.bmi = 'Moderate Thinness'
+            elif 17 <= bmi_val < 18.5:
+                self.bmi = 'Mild Thinness'
+            elif 18.5 <= bmi_val < 25:
+                self.bmi = 'Normal'
+            elif 25 <= bmi_val < 30:
+                self.bmi = 'Overweight'
+            elif 30 <= bmi_val < 35:
+                self.bmi = 'Obese Class I'
+            elif 35 <= bmi_val < 40:
+                self.bmi = 'Obese Class II'
             else:
-                self.bmi_category = 'Obese Class III'
+                self.bmi = 'Obese Class III'
 
         super().save(*args, **kwargs)
 
