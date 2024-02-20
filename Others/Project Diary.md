@@ -261,7 +261,7 @@ base.html
 <br><br>
 
 
-## 📅 13 FEB 2024
+## 📅 16 FEB 2024
 
 **views.py in healthprofile**
 
@@ -276,3 +276,31 @@ base.html
 - changes made for below mentioned templates
 
     1. dashboard.html
+
+<br>
+<br>
+
+## 📅 18 FEB 2024
+
+
+
+**models.py in healthprofile**
+- created a model
+    1. HealthRecord
+
+<br>
+
+**admin.py in healthprofile**
+- added to admin site
+    1. HealthRecord
+
+
+<br><br>
+
+
+## 📅 20 FEB 2024
+
+**models.py in healthprofile**
+
+- changes in below model
+    1. HealthRecord - cleared a bug related to automatically updating the BMI
