@@ -17,8 +17,8 @@ class HealthProfileAdmin(admin.ModelAdmin):
         return obj.occupation.name
 
 class HealthRecordAdmin(admin.ModelAdmin):
-    list_display = ('id','healthprofileid','healthprofilename','height','weight','physical_activity','daily_steps','blood_pressure','heart_rate','sleep_duration','quality_of_sleep','stress_level','bmi','sleep_disorder')
-    search_fields = ('id','healthprofile__id','healthprofile__name','height','weight','physical_activity','daily_steps','blood_pressure','heart_rate','sleep_duration','quality_of_sleep','stress_level','bmi','sleep_disorder')
+    list_display = ('id','healthprofileid','healthprofilename','height','weight','bmi_value','bmi','physical_activity','screen_time','stress_level','heart_rate','systolic_pressure','systolic_pressure_bp','diastolic_pressure','diastolic_pressure_bp','sleep_duration','quality_of_sleep','sleep_disorder')
+    search_fields = ('id','healthprofile__id','healthprofile__name','height','weight','bmi_value','bmi','physical_activity','screen_time','stress_level','heart_rate','systolic_pressure','systolic_pressure_bp','diastolic_pressure','diastolic_pressure_bp','sleep_duration','quality_of_sleep','sleep_disorder')
 
     @admin.display(ordering='healthprofile__name',description='healthprofile name')
     def healthprofilename(self,obj):
