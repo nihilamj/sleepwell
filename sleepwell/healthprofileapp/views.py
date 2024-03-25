@@ -51,7 +51,7 @@ def signin(request):
                     'password': health_profile.password,
                     'gender': health_profile.gender,
                     'age': health_profile.age,
-                    'occupations': health_profile.occupations.name,
+                    'occupation': health_profile.occupation.name,
                 }
 
                 print(userrecord)
