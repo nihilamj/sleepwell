@@ -94,7 +94,9 @@ class HealthRecord(models.Model):
     def save(self, *args, **kwargs):
         # BMI Calculation and saving logic
         if self.height > 0 and self.weight > 0:
-            self.bmi_value = self.weight / (self.height ** 2)
+            self.bmi_value = round(self.weight / ((self.height/100) ** 2),2)
+            print(f"height value = {self.height}")
+            print(f"weight value = {self.weight}")
             print(f"bmi value = {self.bmi_value}")
             if self.bmi_value < 16:
                 self.bmi = 'SEVERE THINNESS'
