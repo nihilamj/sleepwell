@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('mainapp.urls')),
     path('profile/', include('healthprofileapp.urls')),
+    path('machine_learning/', include('mlpredictor.urls')),
 ]
