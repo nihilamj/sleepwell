@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 
 from healthprofileapp.models import HealthRecord,HealthProfile
 
+from .newdataframe import dataFrame
 
 def predict(request,pk):
 
@@ -24,11 +25,12 @@ def predict(request,pk):
     if data['authenticated']:
 
         healthRecord = HealthRecord.objects.get(pk=pk)
-        healthprofile = HealthProfile.objects.get(pk=healthRecord.healthprofile.id)
+        healthProfile = HealthProfile.objects.get(pk=healthRecord.healthprofile.id)
 
-        print(healthprofile.occupation)
+        data_frame = dataFrame(healthRecord,healthProfile)
 
-
+        print("newdataframe @ viws", data_frame)
+        
     else:
         return redirect('signin')
 
