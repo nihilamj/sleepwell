@@ -44,3 +44,12 @@ to store sensitive information like database credentials in environment variable
 
 ## pandas 2.2.1
 Python package that provides fast, flexible, and expressive data structures designed to make working with "relational" or "labeled" data both easy and intuitive. It aims to be the fundamental high-level building block for doing practical, real world data analysis in Python. Additionally, it has the broader goal of becoming the most powerful and flexible open source data analysis / manipulation tool available in any language. 
+
+## joblib-1.3.2
+Joblib is a set of tools to provide lightweight pipelining in Python. In particular:
+
+transparent disk-caching of functions and lazy re-evaluation (memoize pattern)
+
+easy simple parallel computing
+
+Joblib is optimized to be fast and robust on large data in particular and has specific optimizations for numpy arrays
