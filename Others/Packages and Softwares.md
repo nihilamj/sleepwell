@@ -41,3 +41,6 @@ to store sensitive information like database credentials in environment variable
 
 ## psycopg-binary 3.1.17 & psycopg-3.1.17
  Psycopg-binary 3 is a modern implementation of a PostgreSQL adapter for Python.
+
+## pandas 2.2.1
+Python package that provides fast, flexible, and expressive data structures designed to make working with "relational" or "labeled" data both easy and intuitive. It aims to be the fundamental high-level building block for doing practical, real world data analysis in Python. Additionally, it has the broader goal of becoming the most powerful and flexible open source data analysis / manipulation tool available in any language. 
