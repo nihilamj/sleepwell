@@ -35,7 +35,7 @@ def predict(request,pk):
 
         #sleepwell v1 - joblib format
 
-        model_path = os.path.join(settings.BASE_DIR, 'mlpredictor/mlmodels/SleepWellV1.pkl')
+        model_path = os.path.join(settings.BASE_DIR, 'mlpredictor/mlmodels/SleepWellVersion1.joblib')
         model = joblib.load(model_path)
         predictions = model.predict(data_frame)
         print("Prediction = ", predictions)
