@@ -33,17 +33,24 @@ def predict(request,pk):
         data_frame = dataFrame(healthRecord,healthProfile)
         #print("newdataframe @ viws", data_frame)
 
-        #sleepwell v1 - joblib format
+        #sleepWellVersion1 - joblib format
 
         model_path = os.path.join(settings.BASE_DIR, 'mlpredictor/mlmodels/SleepWellVersion1.joblib')
         model = joblib.load(model_path)
-        predictions = model.predict(data_frame)
-        print("Prediction = ", predictions)
+        ml_predictions = model.predict(data_frame)
+        print("Prediction = ", ml_predictions[0])
+        predicted_sleep_disorder = ml_predictions[0]
 
-        #sleepwell v1 - pkl format
+        #sleepWellVersion1 - pkl format
 
-        #sleepwell v2- joblib format
-        #sleepwell v2 - pkl format
+        #sleepWellVersion2- joblib format
+        #sleepWellVersion2 - pkl format
+        
+        predicted_sleep_disorder = ml_predictions[0]
+        healthRecord.sleep_disorder = predicted_sleep_disorder
+        healthRecord.save()
+
+
         
     else:
         return redirect('signin')
