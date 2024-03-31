@@ -56,3 +56,6 @@ Joblib is optimized to be fast and robust on large data in particular and has sp
 
 ## scikit-learn-1.4.1
 Scikit-learn is an open source machine learning library that supports supervised and unsupervised learning. It also provides various tools for model fitting, data preprocessing, model selection, model evaluation, and many other utilities
+
+## openAI
+The OpenAI Python library provides convenient access to the OpenAI REST API from any Python 3.7+ application. The library includes type definitions for all request params and response fields, and offers both synchronous and asynchronous clients powered by httpx.
