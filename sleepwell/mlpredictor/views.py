@@ -50,6 +50,8 @@ def predict(request,pk):
         healthRecord.sleep_disorder = predicted_sleep_disorder
         healthRecord.save()
 
+        return render(request, 'mlpredictor/report.html', {'page': 'report','healthRecord':healthRecord,'healthProfile':healthProfile})
+
 
         
     else:

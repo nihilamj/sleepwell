@@ -1,0 +1,96 @@
+{% extends "mainapp/base.html" %}
+{% load static %}
+{% block content %}
+
+<br>
+
+<h1>Your Report</h1>
+
+<table border="1">
+    <tr>
+        <th>USER ID</th>
+        <td>{{healthProfile.id}}</td>
+    </tr>
+    <tr>
+        <th>NAME</th>
+        <th>{{healthProfile.name}}</th>
+    </tr>
+    <tr>
+        <th>AGE</th>
+        <th>{{healthProfile.age}}</th>
+    </tr>
+    <tr>
+        <th>GENDER</th>
+        <th>{{healthProfile.gender}}</th>
+    </tr>
+    <tr>
+        <th>OCCUPATION SECTOR</th>
+        <th>{{healthProfile.occupation.name}}</th>
+    </tr>
+    <tr>
+        <th>RECORD ID</th>
+        <td>{{healthRecord.id}}</td>
+    </tr>
+    <tr>
+        <th>HEIGHT</th>
+        <th>{{healthRecord.height}} CM</th>
+    </tr>
+    <tr>
+        <th>WEIGHT</th>
+        <th>{{healthRecord.weight}} KG</th>
+    </tr>
+    <tr>
+        <th>BMI VALUE</th>
+        <th>{{healthRecord.bmi_value}}</th>
+    </tr>
+    <tr>
+        <th>BMI</th>
+        <th>{{healthRecord.bmi}}</th>
+    </tr>
+    <tr>
+        <th>SYSTOLIC PRESSURE</th>
+        <th>{{healthRecord.systolic_pressure}} mmHg </th>
+    </tr>
+    <tr>
+        <th>SYSTOLIC PRESSURE CATEGORY</th>
+        <th>{{healthRecord.systolic_pressure_bp}}</th>
+    </tr>
+    <tr>
+        <th>DIASTOLIC PRESSURE</th>
+        <th>{{healthRecord.diastolic_pressure}} mmHg </th>
+    </tr>
+    <tr>
+        <th>DIASTOLIC PRESSURE CATEGORY</th>
+        <th>{{healthRecord.diastolic_pressure_bp}}</th>
+    </tr>
+    <tr>
+        <th>PHYSICAL ACTIVITY</th>
+        <th>{{healthRecord.physical_activity}} Minutes</th>
+    </tr>
+    <tr>
+        <th>SCREEN TIME</th>
+        <th>{{healthRecord.screen_time}} Minutes</th>
+    </tr>
+    <tr>
+        <th>STRESS LEVEL</th>
+        <th>{{healthRecord.stress_level}}</th>
+    </tr>
+    <tr>
+        <th>HEART RATE</th>
+        <th>{{healthRecord.heart_rate}} BPM</th>
+    </tr>
+    <tr>
+        <th>SLEEP DURATION</th>
+        <th>{{healthRecord.sleep_duration}} Minutes</th>
+    </tr>
+    <tr>
+        <th>QUALITY OF SLEEP</th>
+        <th>{{healthRecord.quality_of_sleep}}</th>
+    </tr>
+    <tr>
+        <th>SLEEP DISORDER</th>
+        <th>{{healthRecord.sleep_disorder}}</th>
+    </tr>
+</table>
+
+{% endblock content %}
