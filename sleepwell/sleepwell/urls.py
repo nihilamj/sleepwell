@@ -22,4 +22,5 @@ urlpatterns = [
     path('', include('mainapp.urls')),
     path('profile/', include('healthprofileapp.urls')),
     path('machine_learning/', include('mlpredictor.urls')),
+    path('sleepwellgpt/', include('sleepwellgpt.urls')),
 ]
