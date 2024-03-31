@@ -3,6 +3,6 @@ from . import views
 
 
 urlpatterns = [
-    #path("signup/", views.signup, name="signup"),
+    path("chatgpt/<int:pk>/", views.chatgpt, name="chatgpt"),
 
 ]
