@@ -1,0 +1,16 @@
+{% extends "mainapp/base.html" %}
+{% load static %}
+{% block content %}
+
+<h1>Personalized HEALTH PLAN</h1>
+<br>
+
+{% for i in html_response %}
+{% if '**' in i %}
+        <strong>{{ i }}</strong> <br>
+    {% else %}
+        {{ i }} <br>
+    {% endif %}
+{% endfor %}
+
+{% endblock content %}

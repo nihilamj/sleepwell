@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
-
+import openai
+import jinja2
 from healthprofileapp.models import HealthProfile, HealthRecord
+from sleepwell import settings
 
 # Create your views here.
 
@@ -53,7 +55,30 @@ def chatgpt(request, pk):
             Based on these attributes, create a personalized, healthy, step-by-step health plan. This plan should include recommendations for sleep schedule, exercises, food habits, lifestyle adjustments, do's and don'ts, and areas of focus or improvement. Ensure that the plan addresses the user's current health status and compares it with ideal or optimum values for each attribute. Provide detailed instructions for each aspect of the plan to help the user achieve better health outcomes.
         """
         print(prompt)
-    
+
+        
+        client = openai.OpenAI(
+            # This is the default and can be omitted
+            api_key = settings.OPENAI_API_KEY
+        )
+
+        response = client.chat.completions.create(
+            messages=[
+                {
+                    "role": "user",
+                    "content": prompt,
+                    
+                }
+            ],
+            model="gpt-3.5-turbo",
+        )
+        
+        print(response)
+        chatgpt_response = response.choices[0].message.content.strip()
+        #html_response = chatgpt_response.replace('\n', '<br>')
+        # html_response = jinja2.Template(chatgpt_response.replace('\n', '<br>')).render()
+        html_response = chatgpt_response.split('\n')
+        return render(request, 'sleepwellgpt/healthplan.html', {'page': 'healthplan','html_response': html_response})
         
     else:
             return redirect('signin')
