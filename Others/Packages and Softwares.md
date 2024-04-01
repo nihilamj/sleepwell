@@ -59,3 +59,6 @@ Scikit-learn is an open source machine learning library that supports supervised
 
 ## openAI
 The OpenAI Python library provides convenient access to the OpenAI REST API from any Python 3.7+ application. The library includes type definitions for all request params and response fields, and offers both synchronous and asynchronous clients powered by httpx.
+
+## jinja2-3.1.3
+Jinja is a fast, expressive, extensible templating engine. Special placeholders in the template allow writing code similar to Python syntax. Then the template is passed data to render the final document.
