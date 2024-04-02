@@ -7,3 +7,6 @@ def home(request):
 
 def about(request):
     return render(request, 'mainapp/about.html', {'page': 'about'})
+
+def healthy_lifestyle(request):
+    return render(request, 'mainapp/healthy_lifestyle.html', {'page': 'healthy_lifestyle'})
