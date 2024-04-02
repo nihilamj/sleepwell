@@ -6,6 +6,12 @@ from healthprofileapp.models import HealthProfile,HealthRecord
 from .forms import OccupationForm, HealthProfileSignUPForm,HealthProfileSignINForm
 from django.contrib import messages
 
+
+from .mails import otpmail
+
+
+from .otpgenerate import otp_generate
+
 # Basic Functions
 
 def getUser(request):
@@ -20,6 +26,9 @@ def removeUser(request):
 # Create your views here.
 
 def signup(request):
+    removeUser(request)
+    if request.session.has_key('user_data'):
+        del request.session['user_data']
     if request.method == 'POST':
         form = HealthProfileSignUPForm(request.POST)
         if form.is_valid():
@@ -35,6 +44,7 @@ def signup(request):
 
 
 def signin(request):
+
     if request.method == 'POST':
         form = HealthProfileSignINForm(request.POST)
         print("1")
@@ -60,7 +70,7 @@ def signin(request):
             except HealthProfile.DoesNotExist:
                 return HTTPResponse("Invalid credentials. Please try again.")
             
-            return redirect('dashboard')  # Change 'dashboard' to the name of your dashboard URL
+            return redirect('profile')  # Change 'dashboard' to the name of your dashboard URL
             #return HttpResponseRedirect('/',request)
     else:
         form = HealthProfileSignINForm()
@@ -143,3 +153,55 @@ def healthrecord_add(request):
             return render(request, 'healthprofileapp/healthrecord_add.html', {'page': 'healthrecord_add','data':data})
     else:
         return redirect('signin')
+
+
+def generateotp(request):
+    if request.session.has_key('user_data'):
+        del request.session['user_data']
+
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        userrecord = HealthProfile.objects.get(email=email)
+        pk = userrecord.pk
+        if userrecord:
+            otp = otp_generate()
+            request.session['passwordreset']={'pk':pk, 'otp':otp}
+            otpmail(email=email, otp=otp)
+            return redirect('otp_verification')  
+
+        else:
+            pass # return no user found for this email
+    
+    return render(request, 'healthprofileapp/generateotp.html', {'page': 'generateotp'})
+
+def otp_verification(request):
+    if request.session.has_key('passwordreset'):
+        if request.method == 'POST':
+            entered_otp = request.POST.get('otp')
+            if entered_otp == request.session['passwordreset'].get('otp', False):
+                # OTP verification successful, allow user to reset password
+                return redirect('reset_password')
+            else:
+                # Incorrect OTP entered
+                return render(request, 'healthprofileapp/otp_verification.html', {'error': 'Invalid OTP'})
+            
+        return render(request, 'healthprofileapp/otp_verification.html')
+    else:
+        return redirect('generateotp')
+
+def reset_password(request):
+    if request.session.has_key('passwordreset'):
+        if request.method == 'POST':
+            password = request.POST.get('password')
+            pk = request.session['passwordreset'].get('pk', None)
+            userrecord = HealthProfile.objects.get(pk=pk)
+            userrecord.password=password
+            userrecord.save()
+            return redirect('signin')
+        return render(request, 'healthprofileapp/reset_password.html')
+    else:
+        return redirect('generateotp')
+
+
+
+
