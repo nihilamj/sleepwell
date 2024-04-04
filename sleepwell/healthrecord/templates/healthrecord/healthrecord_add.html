@@ -1,0 +1,59 @@
+{% extends "superindex/base.html" %}
+{% load static %}
+{% block content %}
+
+
+
+<!-- Start Contact Us -->
+
+                
+                
+
+<h2>Enter Health Data</h2>
+
+<br>
+
+<h3>Kindly enter the correct, once it is add , it can't deleted or edited by yourself</h3>
+
+<br>
+
+<form method="post" action="">
+    {% csrf_token %}
+    <label for="height">Height (in centimeter):</label>
+    <input type="number" name="height" id="height" min="0" required><br>
+    
+    <label for="weight">Weight (in Kilogram):</label>
+    <input type="number" name="weight" id="weight" min="0" required><br>
+    
+    <label for="physical_activity">Physical Activity (in minutes):</label>
+    <input type="number" name="physical_activity" id="physical_activity" min="0" required><br>
+    
+    <label for="screen_time">Screen Time (in minutes):</label>
+    <input type="number" name="screen_time" id="screen_time" min="0" required><br>
+    
+    <label for="stress_level">Stress Level (from 1 to 10 range):</label>
+    <input type="number" name="stress_level" id="stress_level" min="1" max="10" required><br>
+    
+    <label for="heart_rate">Heart Rate (in BPM):</label>
+    <input type="number" name="heart_rate" id="heart_rate" min="0" required><br>
+    
+    <label for="systolic_pressure">Systolic Pressure (in mmHg):</label>
+    <input type="number" name="systolic_pressure" id="systolic_pressure" min="0" required><br>
+    
+    <label for="diastolic_pressure">Diastolic Pressure (in mmHg):</label>
+    <input type="number" name="diastolic_pressure" id="diastolic_pressure" min="0" required><br>
+    
+    <label for="sleep_duration">Sleep Duration (in minutes):</label>
+    <input type="number" name="sleep_duration" id="sleep_duration" min="0" required><br>
+    
+    <label for="quality_of_sleep">Quality of Sleep (from 1 to 10 range):</label>
+    <input type="number" name="quality_of_sleep" id="quality_of_sleep" min="1" max="10"><br>
+    
+    <button type="submit">Add The record</button>
+</form>
+
+
+  
+<!--/ End Contact Us -->
+
+{% endblock content %}

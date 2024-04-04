@@ -19,8 +19,9 @@ from django.urls import path,include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('mainapp.urls')),
-    path('profile/', include('healthprofileapp.urls')),
+    path('', include('superindex.urls')),
+    path('healthprofile/', include('healthprofile.urls')),
+    path('healthrecord/', include('healthrecord.urls')),
     path('machine_learning/', include('mlpredictor.urls')),
     path('sleepwellgpt/', include('sleepwellgpt.urls')),
 ]

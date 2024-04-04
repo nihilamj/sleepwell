@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect
 import openai
 import jinja2
-from healthprofileapp.models import HealthProfile, HealthRecord
+
+from healthrecord.models import HealthRecord
+from healthprofile.models import HealthProfile
+
 from sleepwell import settings
 
 # Create your views here.

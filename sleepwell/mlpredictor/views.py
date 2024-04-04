@@ -3,7 +3,9 @@ import joblib
 from django.conf import settings
 import os
 
-from healthprofileapp.models import HealthRecord,HealthProfile
+
+from healthrecord.models import HealthRecord
+from healthprofile.models import HealthProfile
 
 from .newdataframe import dataFrame
 
