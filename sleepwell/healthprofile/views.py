@@ -3,7 +3,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponseRedirect
 
 from .models import HealthProfile, Occupation
-from .forms import OccupationForm, HealthProfileSignUPForm,HealthProfileSignINForm
+from .forms import OccupationForm, SignUPForm,SignINForm
 from django.contrib import messages
 
 from .mails import otpmail
@@ -24,35 +24,43 @@ def removeUser(request):
 # Create your views here.
 
 def signup(request):
+
+    messagebox = None
+
     removeUser(request)
+
     if request.session.has_key('user_data'):
         del request.session['user_data']
+
     if request.method == 'POST':
-        form = HealthProfileSignUPForm(request.POST)
-        if form.is_valid():
-            form.save()
+        signup_form = SignUPForm(request.POST)
+        try:
+            signup_form.is_valid()
+            signup_form.save()
             return redirect('signin')  # Redirect to a success URL
-        else:
-            print("Error")
+        except:
+            messagebox = "FORM ERROR, PLEASE CORRECT THE BELOW ERRORS !!!"
     else:
-        form = HealthProfileSignUPForm()
+        signup_form = SignUPForm()
     
-    return render(request, 'healthprofile/signup.html', {'page': 'signup','form': form})
+    return render(request, 'healthprofile/signup.html', {'page': 'signup','signup_form': signup_form,'messagebox':messagebox})
 
 
 
 def signin(request):
 
+    messagebox = None
+
     if request.method == 'POST':
-        form = HealthProfileSignINForm(request.POST)
-        print("1")
-        if form.is_valid():
+        signin_form = SignINForm(request.POST)
+
+        if signin_form.is_valid():
+
             removeUser(request)
             try:
-                email = form.cleaned_data['email']
+                email = signin_form.cleaned_data['email']
                 health_profile = HealthProfile.objects.get(email=email)
                 
-                print(health_profile)
                 userrecord = {
                     'id': health_profile.id,
                     'name': health_profile.name,
@@ -63,16 +71,16 @@ def signin(request):
                     'occupation': health_profile.occupation.name,
                 }
 
-                print(userrecord)
+
                 request.session['user_data'] = {'authenticated': True, 'userrecord':userrecord}
             except HealthProfile.DoesNotExist:
-                return HTTPResponse("Invalid credentials. Please try again.")
+                messagebox = "Invalid credentials. Please try again."
             
             return redirect('profile')  # Change 'dashboard' to the name of your dashboard URL
             #return HttpResponseRedirect('/',request)
     else:
-        form = HealthProfileSignINForm()
-    return render(request, 'healthprofile/signin.html', {'page': 'signin','form': form})
+        signin_form = SignINForm()
+    return render(request, 'healthprofile/signin.html', {'page': 'signin','signin_form': signin_form, 'messagebox':messagebox})
 
 
 

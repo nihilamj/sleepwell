@@ -13,7 +13,7 @@ class OccupationForm(forms.ModelForm):
         model = Occupation
         fields = ['name']
 
-class HealthProfileSignUPForm(forms.ModelForm):
+class SignUPForm(forms.ModelForm):
     #occupation = forms.ModelChoiceField(queryset=Occupation.objects.all(), empty_label=None)
 
     GENDER_CHOICES = HealthProfile.GENDER_CHOICES
@@ -55,7 +55,7 @@ class HealthProfileSignUPForm(forms.ModelForm):
         return password
 
 
-class HealthProfileSignINForm(forms.Form):
+class SignINForm(forms.Form):
     email = forms.EmailField(label="Email", required=True)
     password = forms.CharField(label="Password", max_length=255, required=True, widget=forms.PasswordInput)
 

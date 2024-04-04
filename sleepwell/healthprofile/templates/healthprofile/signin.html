@@ -2,24 +2,32 @@
 {% load static %}
 {% block content %}
 
+       
+{% if messagebox %}
+{{messagebox}}
+{% endif %}
 
-<h1>Login</h1>
-    <form method="post" action="{% url 'signin' %}">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <br>
-        {% if form.errors %}
+<br> <br>
+
+{% if signin_form.errors %}
                       <div class="alert alert-danger" role="alert">
-                        <strong>Error!</strong> Please correct the errors below.
                         <ul>
-                          {% for field, errors in form.errors.items %}
+                          {% for field, errors in signin_form.errors.items %}
                             {% for error in errors %}
-                              <li>{{ error }}</li>
+                              <li>{{ error }}</li> <br>
                             {% endfor %}
                           {% endfor %}
                         </ul>
                       </div>
                     {% endif %}
+
+
+<br>
+
+<h1>Login</h1>
+    <form method="post" action="{% url 'signin' %}">
+        {% csrf_token %}
+        {{ signin_form }}
         <button type="submit">Login</button>
     </form>
 

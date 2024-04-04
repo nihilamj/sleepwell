@@ -6,25 +6,33 @@
 
 <!-- Start Contact Us -->
 
-                
-                
+        
+{% if messagebox %}
+{{messagebox}}
+{% endif %}
+<br> <br>
 
-                <form method="post" action="{% url 'signup' %}">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    {% if form.errors %}
+{% if signup_form.errors %}
                       <div class="alert alert-danger" role="alert">
-                        <strong>Error!</strong> Please correct the errors below.
                         <ul>
-                          {% for field, errors in form.errors.items %}
+                          {% for field, errors in signup_form.errors.items %}
                             {% for error in errors %}
-                              <li>{{ error }}</li>
+                              <li>{{ error }}</li> <br>
                             {% endfor %}
                           {% endfor %}
                         </ul>
                       </div>
                     {% endif %}
-                    <button type="submit">Submit</button>
+
+
+
+
+<br>
+
+                <form method="post" action="{% url 'signup' %}">
+                    {% csrf_token %}
+                    {{ signup_form.as_p }}
+                    <button type="submit">Signup</button>
                   </form>
 
 
