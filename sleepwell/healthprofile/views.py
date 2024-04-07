@@ -213,6 +213,7 @@ def reset_password(request):
             userrecord = HealthProfile.objects.get(pk=pk)
             userrecord.password=password
             userrecord.save()
+            messages.info(request, "Password Changed Successfully")
             return redirect('signin')
         return render(request, 'healthprofile/reset_password.html')
     else:

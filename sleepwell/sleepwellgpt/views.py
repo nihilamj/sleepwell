@@ -6,10 +6,13 @@ from healthrecord.models import HealthRecord
 from healthprofile.models import HealthProfile
 
 from sleepwell import settings
+from django.contrib import messages
 
 # Create your views here.
 
 def chatgpt(request, pk):
+
+    html_response = None
 
     data = {}
 
@@ -59,40 +62,35 @@ def chatgpt(request, pk):
         """
         print(prompt)
 
-        
-        client = openai.OpenAI(
-            # This is the default and can be omitted
-            api_key = settings.OPENAI_API_KEY
-        )
+        try:
+            client = openai.OpenAI(
+                # This is the default and can be omitted
+                api_key = settings.OPENAI_API_KEY
+            )
 
-        response = client.chat.completions.create(
-            messages=[
-                {
-                    "role": "user",
-                    "content": prompt,
-                    
-                }
-            ],
-            model="gpt-3.5-turbo",
-        )
+            response = client.chat.completions.create(
+                messages=[
+                    {
+                        "role": "user",
+                        "content": prompt,
+                        
+                    }
+                ],
+                model="gpt-3.5-turbo",
+            )
+            
+            
+            chatgpt_response = response.choices[0].message.content.strip()
+            #html_response = chatgpt_response.replace('\n', '<br>')
+            # html_response = jinja2.Template(chatgpt_response.replace('\n', '<br>')).render()
+            html_response = chatgpt_response.split('\n')
         
-        print(response)
-        chatgpt_response = response.choices[0].message.content.strip()
-        #html_response = chatgpt_response.replace('\n', '<br>')
-        # html_response = jinja2.Template(chatgpt_response.replace('\n', '<br>')).render()
-        html_response = chatgpt_response.split('\n')
+        except:
+             print("An error occurred:", e)
+             messages.error(request, 'An error occurred while fetching Personalized plan from SleepWellGPT. Kindly Please try again')
         return render(request, 'sleepwellgpt/healthplan.html', {'page': 'healthplan','html_response': html_response})
         
     else:
             return redirect('signin')
     
-
-
-def generate_personalized_health_plan(user_data):
-    # Generate personalized health plan based on user data
-    # Example implementation:
-    health_plan = ""
-    # Include recommendations based on user's health status
-    # Example: health_plan += "Recommendations for improving sleep: ..."
-    return health_plan
 

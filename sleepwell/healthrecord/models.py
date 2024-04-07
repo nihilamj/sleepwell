@@ -50,12 +50,14 @@ class HealthRecord(models.Model):
     diastolic_pressure = models.PositiveIntegerField(verbose_name='Diastolic Pressure', default=70, blank=False, null=False)
     diastolic_pressure_bp = models.CharField(verbose_name='Diastolic Pressure BP', max_length=50, choices=BP_LEVELS_CHOICES, blank=True, null=True)
 
-
+    
 
     sleep_duration = models.PositiveIntegerField(verbose_name='Sleep Duration',  default=300,blank=False, null=False)
     quality_of_sleep = models.PositiveIntegerField(verbose_name='Quality of Sleep', default=5,blank=False, null=True)
     
     sleep_disorder = models.CharField(verbose_name='Sleep Disorder', max_length=50, choices=SLEEP_DISORDER_CHOICES , blank=True, null=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def save(self, *args, **kwargs):
         # BMI Calculation and saving logic

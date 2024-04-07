@@ -1,0 +1,71 @@
+{% extends "superindex/base.html" %}
+{% load static %}
+{% block content %}
+
+
+
+<!-- Start Contact Us -->
+
+<br>
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+<br>    
+
+
+<table>
+
+    <tr>
+        <th>
+            Record ID
+        </th>
+        <th>
+            Created Time
+        </th>
+        <th>
+            Sleep Disorder
+        </th>
+        
+        <th>
+            predict
+        </th>
+        <th>
+            Predict
+        </th>
+        <th>
+            Delete
+        </th>
+    </tr>
+{% for i in data.healthrecords %}
+    <tr>
+        <td>
+            {{i.id}}
+        </td>
+        <td>
+            {{i.created_at}}
+        </td>
+        <td>
+            {{i.sleep_disorder}}
+        </td>
+        <td>
+            <a href="{% url 'predict' i.id %}">Predict</a>
+        </td>
+        <td>
+            <a href="{% url 'healthrecord_view' i.id %}">View</a> 
+        </td>
+        <td>
+            <a href="{% url 'healthrecord_delete' i.id %} ">Delete</a> 
+        </td>
+    </tr>
+{% endfor %}
+</table>    
+
+
+  
+<!--/ End Contact Us -->
+
+{% endblock content %}

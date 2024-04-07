@@ -1,0 +1,119 @@
+{% extends "superindex/base.html" %}
+{% load static %}
+{% block content %}
+
+
+
+<!-- Start Contact Us -->
+
+<br>
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+<br>
+                
+                
+
+<h2>Health Data No {{data.healthrecord.id}}</h2>
+
+<br>
+
+
+
+<br>
+
+<table border="1">
+    <tr>
+        <th>USER ID</th>
+        <td>{{data.healthrecord.healthprofile.id}}</td>
+    </tr>
+    <tr>
+        <th>NAME</th>
+        <th>{{data.healthrecord.healthprofile.name}}</th>
+    </tr>
+    <tr>
+        <th>AGE</th>
+        <th>{{data.healthrecord.healthprofile.age}}</th>
+    </tr>
+    <tr>
+        <th>GENDER</th>
+        <th>{{data.healthrecord.healthprofile.gender}}</th>
+    </tr>
+    <tr>
+        <th>OCCUPATION SECTOR</th>
+        <th>{{data.healthrecord.healthprofile.occupation.name}}</th>
+    </tr>
+    <tr>
+        <th>RECORD ID</th>
+        <td>{{data.healthrecord.id}}</td>
+    </tr>
+    <tr>
+        <th>HEIGHT</th>
+        <th>{{data.healthrecord.height}} CM</th>
+    </tr>
+    <tr>
+        <th>WEIGHT</th>
+        <th>{{data.healthrecord.weight}} KG</th>
+    </tr>
+    <tr>
+        <th>BMI VALUE</th>
+        <th>{{data.healthrecord.bmi_value}}</th>
+    </tr>
+    <tr>
+        <th>BMI</th>
+        <th>{{data.healthrecord.bmi}}</th>
+    </tr>
+    <tr>
+        <th>SYSTOLIC PRESSURE</th>
+        <th>{{data.healthrecord.systolic_pressure}} mmHg </th>
+    </tr>
+    <tr>
+        <th>SYSTOLIC PRESSURE CATEGORY</th>
+        <th>{{data.healthrecord.systolic_pressure_bp}}</th>
+    </tr>
+    <tr>
+        <th>DIASTOLIC PRESSURE</th>
+        <th>{{data.healthrecord.diastolic_pressure}} mmHg </th>
+    </tr>
+    <tr>
+        <th>DIASTOLIC PRESSURE CATEGORY</th>
+        <th>{{data.healthrecord.diastolic_pressure_bp}}</th>
+    </tr>
+    <tr>
+        <th>PHYSICAL ACTIVITY</th>
+        <th>{{data.healthrecord.physical_activity}} Minutes</th>
+    </tr>
+    <tr>
+        <th>SCREEN TIME</th>
+        <th>{{data.healthrecord.screen_time}} Minutes</th>
+    </tr>
+    <tr>
+        <th>STRESS LEVEL</th>
+        <th>{{data.healthrecord.stress_level}}</th>
+    </tr>
+    <tr>
+        <th>HEART RATE</th>
+        <th>{{data.healthrecord.heart_rate}} BPM</th>
+    </tr>
+    <tr>
+        <th>SLEEP DURATION</th>
+        <th>{{data.healthrecord.sleep_duration}} Minutes</th>
+    </tr>
+    <tr>
+        <th>QUALITY OF SLEEP</th>
+        <th>{{data.healthrecord.quality_of_sleep}}</th>
+    </tr>
+    <tr>
+        <th>SLEEP DISORDER</th>
+        <th>{{data.healthrecord.sleep_disorder}}</th>
+    </tr>
+</table>
+
+  
+<!--/ End Contact Us -->
+
+{% endblock content %}
