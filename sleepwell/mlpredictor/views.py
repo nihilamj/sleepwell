@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 import joblib
 from django.conf import settings
 import os
-
+from django.contrib import messages
 
 from healthrecord.models import HealthRecord
 from healthprofile.models import HealthProfile
@@ -51,6 +51,7 @@ def predict(request,pk):
         predicted_sleep_disorder = ml_predictions[0]
         healthRecord.sleep_disorder = predicted_sleep_disorder
         healthRecord.save()
+        messages.success(request, "Sleep Disorder is predicted successfully")
 
         return render(request, 'mlpredictor/report.html', {'page': 'report','healthRecord':healthRecord,'healthProfile':healthProfile})
 
