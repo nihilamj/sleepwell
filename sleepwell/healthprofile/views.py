@@ -224,4 +224,5 @@ def account_activation(request):
     userrecord = HealthProfile.objects.get(pk=pk)
     userrecord.is_active = True
     userrecord.save()
+    messages.info(request, "Account activated successfully")
     return redirect('signin')
