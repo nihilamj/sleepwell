@@ -21,42 +21,58 @@ def removeUser(request):
     if request.session.has_key('user_data'):
         del request.session['user_data']
 
+def getOTPsession(request):
+    if request.session.has_key('one_time_password'):
+        return request.session['one_time_password']
+
+def createOTPsession(request):
+    request.session['one_time_password'] = {}
+    return request.session['one_time_password']
+
+def removeOTPsession(request):
+    if request.session.has_key('one_time_password'):
+        del request.session['one_time_password']
+
 # Create your views here.
 
 def signup(request):
 
-    messagebox = None
-
+    
+    
     removeUser(request)
-
-    if request.session.has_key('user_data'):
-        del request.session['user_data']
+    removeOTPsession(request)
 
     if request.method == 'POST':
         signup_form = SignUPForm(request.POST)
         try:
             signup_form.is_valid()
             signup_form.save()
+            messages.success(request, "Health Profile created successfully!!!")
             return redirect('signin')  # Redirect to a success URL
         except:
-            messagebox = "FORM ERROR, PLEASE CORRECT THE BELOW ERRORS !!!"
+            
+            messages.error(request, "OOPS!! Form error")
     else:
         signup_form = SignUPForm()
     
-    return render(request, 'healthprofile/signup.html', {'page': 'signup','signup_form': signup_form,'messagebox':messagebox})
+    return render(request, 'healthprofile/signup.html', {'page': 'signup','signup_form': signup_form})
 
 
 
 def signin(request):
 
-    messagebox = None
+    removeUser(request)
+    removeOTPsession(request)
+
+    
 
     if request.method == 'POST':
         signin_form = SignINForm(request.POST)
 
         if signin_form.is_valid():
 
-            removeUser(request)
+            
+
             try:
                 email = signin_form.cleaned_data['email']
                 health_profile = HealthProfile.objects.get(email=email)
@@ -69,24 +85,35 @@ def signin(request):
                     'gender': health_profile.gender,
                     'age': health_profile.age,
                     'occupation': health_profile.occupation.name,
+                    'is_active':health_profile.is_active
                 }
 
 
-                request.session['user_data'] = {'authenticated': True, 'userrecord':userrecord}
+                
             except HealthProfile.DoesNotExist:
-                messagebox = "Invalid credentials. Please try again."
+                
+                messages.error(request, "OOPS!! Error")
+
+            if health_profile.is_active:
+                request.session['user_data'] = {'authenticated': True, 'userrecord':userrecord}
+                return redirect('profile')  # Change 'dashboard' to the name of your dashboard URL
+            else:
+                messages.warning(request, "Your account isn't activated")
+                messages.info(request, "Please Activate your account")
+                otp_session = createOTPsession(request)
+                otp_session['stage'] = 'activation'
+                request.session['one_time_password'] = otp_session
+                return redirect('generateotp')
             
-            return redirect('profile')  # Change 'dashboard' to the name of your dashboard URL
-            #return HttpResponseRedirect('/',request)
     else:
         signin_form = SignINForm()
-    return render(request, 'healthprofile/signin.html', {'page': 'signin','signin_form': signin_form, 'messagebox':messagebox})
+    return render(request, 'healthprofile/signin.html', {'page': 'signin','signin_form': signin_form})
 
 
 
 def signout(request):
-    if request.session.has_key('user_data'):
-        del request.session['user_data']
+    removeUser(request)
+    removeOTPsession(request)
     return redirect('signin')  # Redirect to the sign-in page after logout
     
 
@@ -118,8 +145,13 @@ def profile(request):
 
 
 def generateotp(request):
-    if request.session.has_key('user_data'):
-        del request.session['user_data']
+
+    removeUser(request)
+
+    try:
+        otp_session = getOTPsession(request)
+    except:
+        return redirect('/')
 
     if request.method == 'POST':
         email = request.POST.get('email')
@@ -127,8 +159,15 @@ def generateotp(request):
         pk = userrecord.pk
         if userrecord:
             otp = otp_generate()
-            request.session['passwordreset']={'pk':pk, 'otp':otp}
-            otpmail(email=email, otp=otp)
+            messages.info(request, "An OTP has sent to your email")
+            # request.session['passwordreset']={'pk':pk, 'otp':otp}
+
+            otp_session['pk'] = pk
+            otp_session['otp'] = otp
+            request.session['one_time_password'] = otp_session
+
+            otpmail(email=email, otp=otp, stage = request.session['one_time_password'].get('stage', None))
+
             return redirect('otp_verification')  
 
         else:
@@ -137,22 +176,37 @@ def generateotp(request):
     return render(request, 'healthprofile/generateotp.html', {'page': 'generateotp'})
 
 def otp_verification(request):
-    if request.session.has_key('passwordreset'):
+    if request.session.has_key('one_time_password'):
+
         if request.method == 'POST':
             entered_otp = request.POST.get('otp')
-            if entered_otp == request.session['passwordreset'].get('otp', False):
+
+            if entered_otp == request.session['one_time_password'].get('otp', None) and request.session['one_time_password'].get('stage', None) == 'reset_password':
                 # OTP verification successful, allow user to reset password
                 return redirect('reset_password')
+            
+            elif entered_otp == request.session['one_time_password'].get('otp', None) and request.session['one_time_password'].get('stage', None) == 'activation':
+                return redirect('account_activation')
+
             else:
                 # Incorrect OTP entered
-                return render(request, 'healthprofile/otp_verification.html', {'error': 'Invalid OTP'})
+                messages.error(request, "OOPS!! OTP is wrong")
+                return render(request, 'healthprofile/otp_verification.html')
             
         return render(request, 'healthprofile/otp_verification.html')
     else:
         return redirect('generateotp')
+    
+
+
+def reset_forgot_password(request):
+    otp_session = createOTPsession(request)
+    otp_session['stage'] = 'reset_password'
+    request.session['one_time_password'] = otp_session
+    return redirect('generateotp')
 
 def reset_password(request):
-    if request.session.has_key('passwordreset'):
+    if request.session.has_key('otp'):
         if request.method == 'POST':
             password = request.POST.get('password')
             pk = request.session['passwordreset'].get('pk', None)
@@ -163,3 +217,11 @@ def reset_password(request):
         return render(request, 'healthprofile/reset_password.html')
     else:
         return redirect('generateotp')
+
+def account_activation(request):
+    otp_session = getOTPsession(request)
+    pk = otp_session.get('pk')
+    userrecord = HealthProfile.objects.get(pk=pk)
+    userrecord.is_active = True
+    userrecord.save()
+    return redirect('signin')

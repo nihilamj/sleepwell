@@ -3,23 +3,19 @@
 {% block content %}
 
        
-{% if messagebox %}
-{{messagebox}}
+
+
+<br> 
+
+<br>
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
 {% endif %}
-
-<br> <br>
-
-{% if signin_form.errors %}
-                      <div class="alert alert-danger" role="alert">
-                        <ul>
-                          {% for field, errors in signin_form.errors.items %}
-                            {% for error in errors %}
-                              <li>{{ error }}</li> <br>
-                            {% endfor %}
-                          {% endfor %}
-                        </ul>
-                      </div>
-                    {% endif %}
+<br>
 
 
 <br>

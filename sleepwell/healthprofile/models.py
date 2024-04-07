@@ -25,6 +25,7 @@ class HealthProfile(models.Model):
     gender = models.CharField(max_length=25, choices=GENDER_CHOICES, blank=False, null=False)
     age = models.IntegerField(blank=False, null=False)
     occupation = models.ForeignKey(Occupation, blank=False,null=False,default=1,on_delete=models.CASCADE)
+    is_active  = models.BooleanField(blank=False, null=False, default=False)
 
     def __str__(self):
         return self.name

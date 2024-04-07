@@ -6,34 +6,37 @@
 
 <!-- Start Contact Us -->
 
-        
-{% if messagebox %}
-{{messagebox}}
-{% endif %}
-<br> <br>
-
-{% if signup_form.errors %}
-                      <div class="alert alert-danger" role="alert">
-                        <ul>
-                          {% for field, errors in signup_form.errors.items %}
-                            {% for error in errors %}
-                              <li>{{ error }}</li> <br>
-                            {% endfor %}
-                          {% endfor %}
-                        </ul>
-                      </div>
-                    {% endif %}
 
 
 
 
 <br>
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+<br>
 
                 <form method="post" action="{% url 'signup' %}">
                     {% csrf_token %}
-                    {{ signup_form.as_p }}
-                    <button type="submit">Signup</button>
-                  </form>
+                    {% for field in signup_form %}
+        <div class="form-group">
+            {{ field.label_tag }}
+            {{ field }}
+            {% if field.errors %}
+                <div class="alert alert-danger" role="alert">
+                    {% for error in field.errors %}
+                        <span class="error">{{ error }}</span><br>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    {% endfor %}
+    <button type="submit">Signup</button>
+</form>
 
 
   
