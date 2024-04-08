@@ -98,12 +98,13 @@ def signin(request):
                 request.session['user_data'] = {'authenticated': True, 'userrecord':userrecord}
                 return redirect('profile')  # Change 'dashboard' to the name of your dashboard URL
             else:
-                messages.warning(request, "Your account isn't activated")
-                messages.info(request, "Please Activate your account")
+                messages.info(request, "Your account isn't activated. Please Activate your account")
                 otp_session = createOTPsession(request)
                 otp_session['stage'] = 'activation'
                 request.session['one_time_password'] = otp_session
                 return redirect('generateotp')
+        else:
+            messages.error(request, "Invalid Username or Password")
             
     else:
         signin_form = SignINForm()
@@ -148,32 +149,33 @@ def generateotp(request):
 
     removeUser(request)
 
-    try:
+    if request.session.has_key('one_time_password'):
         otp_session = getOTPsession(request)
-    except:
-        return redirect('/')
+        if request.method == 'POST':
+            email = request.POST.get('email')
+            userrecord = HealthProfile.objects.get(email=email)
+            pk = userrecord.pk
+            if userrecord:
+                otp = otp_generate()
+                messages.info(request, "An OTP has sent to your email")
+                # request.session['passwordreset']={'pk':pk, 'otp':otp}
 
-    if request.method == 'POST':
-        email = request.POST.get('email')
-        userrecord = HealthProfile.objects.get(email=email)
-        pk = userrecord.pk
-        if userrecord:
-            otp = otp_generate()
-            messages.info(request, "An OTP has sent to your email")
-            # request.session['passwordreset']={'pk':pk, 'otp':otp}
+                otp_session['pk'] = pk
+                otp_session['otp'] = otp
+                request.session['one_time_password'] = otp_session
 
-            otp_session['pk'] = pk
-            otp_session['otp'] = otp
-            request.session['one_time_password'] = otp_session
+                otpmail(email=email, otp=otp, stage = request.session['one_time_password'].get('stage', None),name=userrecord.name)
 
-            otpmail(email=email, otp=otp, stage = request.session['one_time_password'].get('stage', None))
+                return redirect('otp_verification')  
 
-            return redirect('otp_verification')  
-
-        else:
-            pass # return no user found for this email
+            else:
+                pass # return no user found for this email
     
-    return render(request, 'healthprofile/generateotp.html', {'page': 'generateotp'})
+        return render(request, 'healthprofile/generateotp.html', {'page': 'generateotp'})
+    else:
+        return redirect('signin')
+
+    
 
 def otp_verification(request):
     if request.session.has_key('one_time_password'):
@@ -206,10 +208,10 @@ def reset_forgot_password(request):
     return redirect('generateotp')
 
 def reset_password(request):
-    if request.session.has_key('otp'):
+    if request.session.has_key('one_time_password'):
         if request.method == 'POST':
             password = request.POST.get('password')
-            pk = request.session['passwordreset'].get('pk', None)
+            pk = request.session['one_time_password'].get('pk', None)
             userrecord = HealthProfile.objects.get(pk=pk)
             userrecord.password=password
             userrecord.save()

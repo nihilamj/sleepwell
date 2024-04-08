@@ -1,4 +1,5 @@
 {% load static %}
+{% load customfilter %}
 
 <!doctype html>
 <html lang="en">
@@ -63,13 +64,21 @@
 				<button type="button" class="btn btn-outline-light me-2">Sign-out</button> {% endcomment %}
 			  	
 			  
-				{% if request.session.user_data.authenticated %} 
+				{% if request.session.user_data.authenticated %}
+
 					<a href="{% url 'signout'%}" class="btn btn-outline-light me-2">Sign-out</a>
+
 				{% else %}
-				<a href="{% url 'signin'%}" class="btn btn-outline-light me-2">Sign-in</a>
-				<a href="{% url 'signup'%}" class="btn btn-outline-light me-2">Sign-up</a>
+
+					{% if page != 'signin' %}
+					<a href="{% url 'signin'%}" class="btn btn-outline-light me-2">Sign-in</a>
+					{% endif %}
+
+					{% if page != 'signup' %}
+					<a href="{% url 'signup'%}" class="btn btn-outline-light me-2">Sign-up</a>
+					{% endif %}
+
 				{% endif %}
-				
 			</div>
 		  </div>
 		</div>

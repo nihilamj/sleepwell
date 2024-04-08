@@ -2,21 +2,60 @@
 {% load static %}
 {% block content %}
 
-<br>
-{% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-        {% endfor %}
-    </ul>
-{% endif %}
-<br>
 
-<form method="post">
-    {% csrf_token %}
-    <label for="otp">Enter OTP:</label>
-    <input type="text" id="otp" name="otp" required>
-    <button type="submit">Verify OTP</button>
-</form>
+
+<div class="container-fluid col-5 ">
+
+    <br>
+
+    <h1 class="display-1 text-center"> OTP VERIFICATION</h1>
+    
+    <br>
+
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <div class="alert alert-dark text-center" role="alert">
+                    <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+                </div>    
+            {% endfor %}
+        </ul>
+    {% endif %}
+    
+    <br>
+
+    <form method="post" action="{% url 'otp_verification' %}">
+
+        {% csrf_token %}
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <div class="mb-3 text-center"> 
+
+                        <label for="otp" class="form-label">OTP</label>
+
+                        <br>
+                        
+                        <input type="text" class="form-control" id="otp" name="otp" placeholder="Enter your OTP sent to your registered email ID" required>
+
+                        <br>
+
+                        <div class="col-12 text-center">
+                            <button type="submit" class="btn btn-dark w-50 py-2">Verify OTP</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+        <br>
+
+        
+
+    </form>
+</div>
+
 
 {% endblock content %}

@@ -6,14 +6,14 @@ from django.core.mail import EmailMultiAlternatives
 
 from_email = "vbuild64@gmail.com"
 
-def otpmail(email,otp,stage):
+def otpmail(email,otp,stage,name):
     if stage == 'reset_password':
         html_template = 'healthprofile/mails/reset_password.html'
         context = None
-        subject = "SLEEPWELL - PASSWORD RESET"
+        subject = "SLEEPWELL -  OTP for Password Reset"
         recipient_list = [email]
 
-        context = {'OTP':otp}
+        context = {'OTP':otp,'name':name}
         html_message = render_to_string(html_template, {'context':context})
 
         msg = EmailMessage(subject, html_message, from_email, recipient_list)
@@ -23,10 +23,10 @@ def otpmail(email,otp,stage):
     if stage == 'activation':
         html_template = 'healthprofile/mails/activation.html'
         context = None
-        subject = "SLEEPWELL - ACCOUNT ACTIVATION"
+        subject = "SLEEPWELL - Activate Your SleepWell Account"
         recipient_list = [email]
 
-        context = {'OTP':otp}
+        context = {'OTP':otp,'name':name}
         html_message = render_to_string(html_template, {'context':context})
 
         msg = EmailMessage(subject, html_message, from_email, recipient_list)

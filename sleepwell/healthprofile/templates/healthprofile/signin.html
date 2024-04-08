@@ -2,29 +2,76 @@
 {% load static %}
 {% block content %}
 
-       
+    <div class="container-fluid col-5 ">
 
+        <br>
 
-<br> 
+        <h1 class="display-1 text-center">SIGN IN</h1>
+        
+        <br>
 
-<br>
-{% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-        {% endfor %}
-    </ul>
-{% endif %}
-<br>
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <div class="alert alert-dark text-center" role="alert">
+                        <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+                    </div>    
+                {% endfor %}
+            </ul>
+        {% endif %}
+        
+        <br>
 
+        <form method="post" action="{% url 'signin' %}">
+            {% csrf_token %}
 
-<br>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 offset-md-3">
+                        <div class="mb-3 text-center"> 
+                            <table >
+                                {% for field in signin_form %}
+                                    <tr>
+                                        <td style="text-align:left">
+                                            <label class="form-label" for="{{ field.id_for_label }}">
+                                                {{ field.label }}
+                                            </label>
+                                        </td>
+                                        <td style="text-align:right">
+                                            {{ field }}
+                                            {% if field.errors %}
+                                                <br><br>
+                                                <div class="alert alert-danger" role="alert">
+                                                    {% for error in field.errors %}
+                                                        <span class="error">{{ error }}</span><br>
+                                                    {% endfor %}
+                                                </div>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
 
-<h1>Login</h1>
-    <form method="post" action="{% url 'signin' %}">
-        {% csrf_token %}
-        {{ signin_form }}
-        <button type="submit">Login</button>
-    </form>
+            <br>
+
+            <div class="col-12 text-center">
+                <button type="submit" class="btn btn-dark w-50 py-2">SIGN IN</button>
+            </div>
+
+        </form>
+
+        <br>
+
+        <p class="col-12 text-center">
+            <a href="{% url 'reset_forgot_password' %}" class="link-dark">Reset Password</a>
+        </p>
+
+    </div>
+
 
 {% endblock content %}
