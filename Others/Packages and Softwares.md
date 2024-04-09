@@ -62,3 +62,11 @@ The OpenAI Python library provides convenient access to the OpenAI REST API from
 
 ## jinja2-3.1.3
 Jinja is a fast, expressive, extensible templating engine. Special placeholders in the template allow writing code similar to Python syntax. Then the template is passed data to render the final document.
+
+## pdfkit-1.0.0
+Converts HTML to PDF
+Provides Django views to wrap the HTML to PDF conversion of the wkhtmltopdf binary.
+
+## wkhtmltopdf 0.12.6 
+installed as a software in the system and added to environmental variables in system.
+https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox-0.12.6-1.msvc2015-win64.exe
