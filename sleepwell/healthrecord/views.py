@@ -1,7 +1,9 @@
-from http.client import HTTPResponse
+from django.http import HttpResponse
 from django.shortcuts import render,redirect
 from django.http import HttpResponseRedirect
 from django.contrib import messages
+import pdfkit
+
 
 from .models import HealthRecord
 from healthprofile.models import HealthProfile
@@ -123,8 +125,7 @@ def healthrecord_delete(request,pk):
             except Exception as e:
                 messages.error(request,"An error occurred:"+ str(e))
                 return redirect('healthrecords')
-                
-                       
+        
             return render(request, 'healthrecord/healthrecord_view.html', {'page': 'healthrecord_view','data':data})
         except:
             messages.error(request,'No Health Record for the id')
@@ -167,6 +168,56 @@ def healthrecords(request):
             }
                        
             return render(request, 'healthrecord/healthrecords.html', {'page': 'healthrecords','data':data})
+        except Exception as e:
+            print("An error occurred:", e)
+            messages.error(request, 'An error occurred while fetching health records.')
+            return redirect('profile')
+    else:
+        return redirect('signin')
+    
+def generate_pdf(request,pk):
+    data = {}
+
+    if 'user_data' in request.session:
+        if request.session['user_data'] is not None:
+            #Here add the code fetch data from session
+            data['authenticated'] = request.session['user_data'].get('authenticated', False)
+            data['userrecord'] = request.session['user_data'].get('userrecord')
+        else:
+            # Handle the case where request.session['user_data'] is None
+            # For example, set data['authenticated'] to False or another default value
+            data['authenticated'] = False
+    else:
+        # Handle the case where 'user_data' doesn't exist in request.session
+        # For example, set data['authenticated'] to False or another default value
+        data['authenticated'] = False
+        
+    if data['authenticated']:
+
+        
+        try:
+            # health_profile_id = data['userrecord']['id']
+            # HealthProfile.objects.get(pk=)
+            
+            health_record = HealthRecord.objects.get(pk=pk,healthprofile=data['userrecord']['id'])
+
+            data ={
+                'healthrecord':health_record
+            }
+    
+
+            # Render the HTML template
+            rendered_template = render(request, 'healthrecord/pdf_template.html', {'data': data})
+
+            # Convert HTML to PDF
+            pdf = pdfkit.from_string(rendered_template.content.decode('utf-8'), False)
+
+            # Set response headers
+            response = HttpResponse(pdf, content_type='application/pdf')
+            response['Content-Disposition'] = 'attachment; filename="health_record.pdf"'
+
+            return response
+
         except Exception as e:
             print("An error occurred:", e)
             messages.error(request, 'An error occurred while fetching health records.')

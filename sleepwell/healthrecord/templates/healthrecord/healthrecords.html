@@ -4,67 +4,77 @@
 
 
 
-<!-- Start Contact Us -->
+<div class="container-fluid col-5 ">
 
-<br>
-{% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-        {% endfor %}
-    </ul>
-{% endif %}
-<br>    
+    <br>
 
+    <h1 class="display-1 text-center">HEALTH RECORDS</h1>
+    
+    <br>
 
-<table>
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <div class="alert alert-dark text-center" role="alert">
+                    <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+                </div>    
+            {% endfor %}
+        </ul>
+    {% endif %}
+    
+    <br>
 
-    <tr>
-        <th>
-            Record ID
-        </th>
-        <th>
-            Created Time
-        </th>
-        <th>
-            Sleep Disorder
-        </th>
-        
-        <th>
-            predict
-        </th>
-        <th>
-            Predict
-        </th>
-        <th>
-            Delete
-        </th>
-    </tr>
-{% for i in data.healthrecords %}
-    <tr>
-        <td>
-            {{i.id}}
-        </td>
-        <td>
-            {{i.created_at}}
-        </td>
-        <td>
-            {{i.sleep_disorder}}
-        </td>
-        <td>
-            <a href="{% url 'predict' i.id %}">Predict</a>
-        </td>
-        <td>
-            <a href="{% url 'healthrecord_view' i.id %}">View</a> 
-        </td>
-        <td>
-            <a href="{% url 'healthrecord_delete' i.id %} ">Delete</a> 
-        </td>
-    </tr>
-{% endfor %}
-</table>    
+    
 
+                    <table class="table table-hover table-bordered">
 
+                        <tr>
+                            <th>
+                                Record ID
+                            </th>
+                            <th>
+                                Created Time
+                            </th>
+                            <th>
+                                Sleep Disorder
+                            </th>
+                            
+                            <th>
+                                predict
+                            </th>
+                            <th>
+                                Predict
+                            </th>
+                            <th>
+                                Delete
+                            </th>
+                        </tr>
+                    {% for i in data.healthrecords %}
+                        <tr>
+                            <td>
+                                {{i.id}}
+                            </td>
+                            <td>
+                                {{i.created_at}}
+                            </td>
+                            <td>
+                                {{i.sleep_disorder}}
+                            </td>
+                            <td>
+                                <a href="{% url 'predict' i.id %}">Predict</a>
+                            </td>
+                            <td>
+                                <a href="{% url 'healthrecord_view' i.id %}">View</a> 
+                            </td>
+                            <td>
+                                <a href="{% url 'healthrecord_delete' i.id %} ">Delete</a> 
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </table>    
+                
+
+</div>
   
 <!--/ End Contact Us -->
 

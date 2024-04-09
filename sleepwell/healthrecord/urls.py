@@ -9,5 +9,6 @@ urlpatterns = [
     path("healthrecord_delete/<int:pk>", views.healthrecord_delete, name="healthrecord_delete"),
     path("healthrecord_add/", views.healthrecord_add, name="healthrecord_add"),
     path("healthrecords/", views.healthrecords, name="healthrecords"),
+     path('generate_pdf//<int:pk>', views.generate_pdf, name='generate_pdf'),
 
 ]

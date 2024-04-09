@@ -2,104 +2,134 @@
 {% load static %}
 {% block content %}
 
-<br>
-{% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-        {% endfor %}
-    </ul>
-{% endif %}
-<br>
-       
+<div class="container-fluid col-5 ">
 
-<h1>Your Report</h1>
+    <br>
 
-<table border="1">
-    <tr>
-        <th>USER ID</th>
-        <td>{{healthProfile.id}}</td>
-    </tr>
-    <tr>
-        <th>NAME</th>
-        <th>{{healthProfile.name}}</th>
-    </tr>
-    <tr>
-        <th>AGE</th>
-        <th>{{healthProfile.age}}</th>
-    </tr>
-    <tr>
-        <th>GENDER</th>
-        <th>{{healthProfile.gender}}</th>
-    </tr>
-    <tr>
-        <th>OCCUPATION SECTOR</th>
-        <th>{{healthProfile.occupation.name}}</th>
-    </tr>
-    <tr>
-        <th>RECORD ID</th>
-        <td>{{healthRecord.id}}</td>
-    </tr>
-    <tr>
-        <th>HEIGHT</th>
-        <th>{{healthRecord.height}} CM</th>
-    </tr>
-    <tr>
-        <th>WEIGHT</th>
-        <th>{{healthRecord.weight}} KG</th>
-    </tr>
-    <tr>
-        <th>BMI VALUE</th>
-        <th>{{healthRecord.bmi_value}}</th>
-    </tr>
-    <tr>
-        <th>BMI</th>
-        <th>{{healthRecord.bmi}}</th>
-    </tr>
-    <tr>
-        <th>SYSTOLIC PRESSURE</th>
-        <th>{{healthRecord.systolic_pressure}} mmHg </th>
-    </tr>
-    <tr>
-        <th>SYSTOLIC PRESSURE CATEGORY</th>
-        <th>{{healthRecord.systolic_pressure_bp}}</th>
-    </tr>
-    <tr>
-        <th>DIASTOLIC PRESSURE</th>
-        <th>{{healthRecord.diastolic_pressure}} mmHg </th>
-    </tr>
-    <tr>
-        <th>DIASTOLIC PRESSURE CATEGORY</th>
-        <th>{{healthRecord.diastolic_pressure_bp}}</th>
-    </tr>
-    <tr>
-        <th>PHYSICAL ACTIVITY</th>
-        <th>{{healthRecord.physical_activity}} Minutes</th>
-    </tr>
-    <tr>
-        <th>SCREEN TIME</th>
-        <th>{{healthRecord.screen_time}} Minutes</th>
-    </tr>
-    <tr>
-        <th>STRESS LEVEL</th>
-        <th>{{healthRecord.stress_level}}</th>
-    </tr>
-    <tr>
-        <th>HEART RATE</th>
-        <th>{{healthRecord.heart_rate}} BPM</th>
-    </tr>
-    <tr>
-        <th>SLEEP DURATION</th>
-        <th>{{healthRecord.sleep_duration}} Minutes</th>
-    </tr>
-    <tr>
-        <th>QUALITY OF SLEEP</th>
-        <th>{{healthRecord.quality_of_sleep}}</th>
-    </tr>
-    <tr>
-        <th>SLEEP DISORDER</th>
-        <th>{{healthRecord.sleep_disorder}}</th>
-    </tr>
-</table>
+    <h1 class="display-1 text-center">Health Data No {{healthRecord.id}}</h1>
+    
+    <br>
+
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <div class="alert alert-dark text-center" role="alert">
+                    <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+                </div>    
+            {% endfor %}
+        </ul>
+    {% endif %}
+    
+    <br>
+    
+    <div class="container">
+        
+            <div class="col-md-12 offset-md-12 py-2">
+                <div class="mb-12 text-center py-2">
+                    <div  class="table-responsive">
+
+                        <table  class="table table-hover table-bordered">
+                            <tr>
+                                <th>USER ID</th>
+                                <td>{{healthProfile.id}}</td>
+                            </tr>
+                            <tr>
+                                <th>NAME</th>
+                                <td>{{healthProfile.name}}</td>
+                            </tr>
+                            <tr>
+                                <th>AGE</th>
+                                <td>{{healthProfile.age}}</td>
+                            </tr>
+                            <tr>
+                                <th>GENDER</th>
+                                <td>{{healthProfile.gender}}</td>
+                            </tr>
+                            <tr>
+                                <th>OCCUPATION SECTOR</th>
+                                <td>{{healthProfile.occupation.name}}</td>
+                            </tr>
+                            <tr>
+                                <th>RECORD ID</th>
+                                <td>{{healthRecord.id}}</td>
+                            </tr>
+                            <tr>
+                                <th>HEIGHT</th>
+                                <td>{{healthRecord.height}} CM</td>
+                            </tr>
+                            <tr>
+                                <th>WEIGHT</th>
+                                <td>{{healthRecord.weight}} KG</td>
+                            </tr>
+                            <tr class="table-info">
+                                <th >BMI VALUE</th>
+                                <td>{{healthRecord.bmi_value}}</td>
+                            </tr>
+                            <tr class="table-info">
+                                <th >BMI</th>
+                                <td>{{healthRecord.bmi}}</td>
+                            </tr>
+                            <tr>
+                                <th>SYSTOLIC PRESSURE</th>
+                                <td>{{healthRecord.systolic_pressure}} mmHg </td>
+                            </tr>
+                            <tr  class="table-info">
+                                <th>SYSTOLIC PRESSURE CATEGORY</th>
+                                <td>{{healthRecord.systolic_pressure_bp}}</td>
+                            </tr>
+                            <tr>
+                                <th>DIASTOLIC PRESSURE</th>
+                                <td>{{healthRecord.diastolic_pressure}} mmHg </td>
+                            </tr>
+                            <tr class="table-info">
+                                <th >DIASTOLIC PRESSURE CATEGORY</th>
+                                <td>{{healthRecord.diastolic_pressure_bp}}</td>
+                            </tr>
+                            <tr>
+                                <th>PHYSICAL ACTIVITY</th>
+                                <td>{{healthRecord.physical_activity}} Minutes</td>
+                            </tr>
+                            <tr>
+                                <th>SCREEN TIME</th>
+                                <td>{{healthRecord.screen_time}} Minutes</td>
+                            </tr>
+                            <tr>
+                                <th>STRESS LEVEL</th>
+                                <td>{{healthRecord.stress_level}}</td>
+                            </tr>
+                            <tr>
+                                <th>HEART RATE</th>
+                                <td>{{healthRecord.heart_rate}} BPM</td>
+                            </tr>
+                            <tr>
+                                <th>SLEEP DURATION</th>
+                                <td>{{healthRecord.sleep_duration}} Minutes</td>
+                            </tr>
+                            <tr>
+                                <th>QUALITY OF SLEEP</th>
+                                <td>{{healthRecord.quality_of_sleep}}</td>
+                            </tr>
+                            <tr class="table-info">
+                                <th >SLEEP DISORDER</th>
+                                <td>{{healthRecord.sleep_disorder}}</td>
+                            </tr>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    {% if healthRecord.sleep_disorder %}
+        <div class="row">
+            <div class="col-6 text-center">
+                <a href="{% url 'generate_pdf' healthRecord.id  %}" class="btn btn-dark w-100 py-2">print</a>
+            </div>
+            <div class="col-6 text-center">
+                <a href="{% url 'gpt' healthRecord.id  %}" class="btn btn-dark w-100 py-2">Generate Personalized HealthPlan</a>
+            </div>
+        </div>
+    {% endif %}
 
 {% endblock content %}

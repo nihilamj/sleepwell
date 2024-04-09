@@ -85,10 +85,11 @@ def chatgpt(request, pk):
             # html_response = jinja2.Template(chatgpt_response.replace('\n', '<br>')).render()
             html_response = chatgpt_response.split('\n')
         
-        except:
+        except Exception as e:
              print("An error occurred:", e)
              messages.error(request, 'An error occurred while fetching Personalized plan from SleepWellGPT. Kindly Please try again')
-        return render(request, 'sleepwellgpt/healthplan.html', {'page': 'healthplan','html_response': html_response})
+
+        return render(request, 'sleepwellgpt/healthplan.html', {'page': 'healthplan','html_response': html_response,'prompt':prompt})
         
     else:
             return redirect('signin')
